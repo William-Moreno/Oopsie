@@ -11,3 +11,8 @@ A back-end application simulating communication between a driver in distress and
 - Seid Mohamed
 - William Moreno
 
+## UML
+
+Initial UML
+
+![Preliminary Whiteboard](./assets/project-uml.PNG)
