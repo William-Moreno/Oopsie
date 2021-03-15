@@ -12,6 +12,7 @@
   "dependencies": {
     "aws-sdk": "^2.862.0",
     "faker": "^5.4.0",
-    "sqs-consumer": "^5.5.0"
+    "sqs-consumer": "^5.5.0",
+    "dynamoose": "^2.7.0"
   }
 }
