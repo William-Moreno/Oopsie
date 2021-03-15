@@ -14,9 +14,9 @@ major-breakdown.fifo
 
 arn:aws:sns:us-west-2:560831323692:major-breakdown.fifo
 
-minor-breakdown.fifo
+roadside-assistance.fifo
 
-arn:aws:sns:us-west-2:560831323692:minor-breakdown.fifo
+arn:aws:sns:us-west-2:560831323692:roadside-assistance.fifo
 
 auto-theft-breakin.fifo
 
@@ -77,3 +77,25 @@ arn:aws:dynamodb:us-west-2:560831323692:table/roadside-records
 insurance-claims
 
 arn:aws:dynamodb:us-west-2:560831323692:table/insurance-claims
+
+
+
+## Example Towing Schema Structure
+
+- OopsieId (incidentId)
+- name
+- phone
+- \* email
+- date (incidentDate)
+- location
+- vehicle information
+
+
+### Other Fields
+
+- police report id
+- insurance claim number
+- \* name of responder
+
+
+
