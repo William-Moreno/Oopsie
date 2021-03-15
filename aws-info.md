@@ -64,8 +64,16 @@ oopsie-api (not yet deployed)
 
 police-records
 
+arn:aws:dynamodb:us-west-2:560831323692:table/police-records
+
 towing-records
+
+arn:aws:dynamodb:us-west-2:560831323692:table/towing-records
 
 roadside-records
 
+arn:aws:dynamodb:us-west-2:560831323692:table/roadside-records
+
 insurance-claims
+
+arn:aws:dynamodb:us-west-2:560831323692:table/insurance-claims
