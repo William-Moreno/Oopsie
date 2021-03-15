@@ -15,4 +15,4 @@ A back-end application simulating communication between a driver in distress and
 
 Initial UML
 
-![Preliminary Whiteboard](./assets/project-uml.PNG)
+![Preliminary Whiteboard](./assets/oopsie-update.PNG)
