@@ -12,4 +12,4 @@ const policeDispatch = new dynamoose.Schema({
   'location': String,
 });
 
-module.exports = dynamoose.model('police-dispatch', policeDispatch);
+module.exports = dynamoose.model('police-records', policeDispatch);
