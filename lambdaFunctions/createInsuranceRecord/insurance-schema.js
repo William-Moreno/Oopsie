@@ -8,6 +8,7 @@ const insuranceSchema = new dynamoose.Schema({
   'incidentType': String,
   'incidentDate': String,
   'name': String,
+  'insurancePolicy': String,
   'phone': String,
   'vehicle': String,
   'location': String,
