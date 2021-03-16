@@ -3,6 +3,7 @@
 const dynamoose = require('dynamoose');
 
 const insuranceSchema = new dynamoose.Schema({
+  'id': String,
   'incidentId': String,
   'incidentDate': String,
   'name': String,

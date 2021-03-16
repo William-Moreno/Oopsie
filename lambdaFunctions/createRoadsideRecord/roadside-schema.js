@@ -3,6 +3,7 @@
 const dynamoose = require('dynamoose');
 
 const roadsideSchema = new dynamoose.Schema({
+  'id': String,
   'incidentId': String,
   'incidentDate': String,
   'name': String,
@@ -11,4 +12,4 @@ const roadsideSchema = new dynamoose.Schema({
   'location': String,
 });
 
-module.exports = dynamoose.model('roadside-assistance', roadsideSchema);
+module.exports = dynamoose.model('roadside-records', roadsideSchema);
