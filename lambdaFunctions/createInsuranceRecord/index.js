@@ -6,7 +6,7 @@ const insuranceModel = require('./insurance-schema.js');
 
 exports.handler = async (event) => {
 
-  const { incidentId, incidentType, incidentDate, name, phone, vehicle, location } = JSON.parse(event.body);
+  const { incidentId, incidentType, incidentDate, name, insurancePolicy, phone, vehicle, location } = JSON.parse(event.body);
   let data;
 
   let id = uuid();
@@ -20,6 +20,7 @@ exports.handler = async (event) => {
             incidentType,
             incidentDate,
             name,
+            insurancePolicy,
             phone,
             vehicle,
             location,
