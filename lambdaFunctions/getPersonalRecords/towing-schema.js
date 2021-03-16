@@ -2,14 +2,14 @@
 
 const dynamoose = require('dynamoose');
 
-const policeDispatch = new dynamoose.Schema({
+const towingSchema = new dynamoose.Schema({
   'id': String,
   'incidentId': String,
-  'incidentDate': String,
+  'date': String,
   'name': String,
   'phone': String,
   'vehicle': String,
   'location': String,
 });
 
-module.exports = dynamoose.model('police-records', policeDispatch);
+module.exports = dynamoose.model('towing-records', towingSchema);

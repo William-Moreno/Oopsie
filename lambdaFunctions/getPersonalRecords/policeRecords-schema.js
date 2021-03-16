@@ -2,16 +2,13 @@
 
 const dynamoose = require('dynamoose');
 
-const insuranceSchema = new dynamoose.Schema({
-  'id': String,
+const policeRecords = new dynamoose.Schema({
   'incidentId': String,
-  'incidentType': String,
   'incidentDate': String,
   'name': String,
-  'insurancePolicy': String,
   'phone': String,
   'vehicle': String,
   'location': String,
 });
 
-module.exports = dynamoose.model('insurance-claims', insuranceSchema);
+module.exports = dynamoose.model('police-records', policeRecords);
