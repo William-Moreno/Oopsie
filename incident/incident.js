@@ -72,6 +72,7 @@ class IncidentReport {
 
 setInterval(() => {
   let report = new IncidentReport();
+  console.log(report);
 
   const params = {
     MessageGroupId: 'test',
