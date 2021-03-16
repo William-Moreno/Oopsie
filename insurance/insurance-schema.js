@@ -2,7 +2,7 @@
 
 const dynamoose = require('dynamoose');
 
-const roadsideSchema = new dynamoose.Schema({
+const insuranceSchema = new dynamoose.Schema({
   'incidentId': String,
   'incidentDate': String,
   'name': String,
@@ -11,4 +11,4 @@ const roadsideSchema = new dynamoose.Schema({
   'location': String,
 });
 
-module.exports = dynamoose.model('roadside-assistance', roadsideSchema);
+module.exports = dynamoose.model('insurance-reporting', insuranceSchema);
