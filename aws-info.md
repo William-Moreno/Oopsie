@@ -58,7 +58,9 @@ https://sqs.us-west-2.amazonaws.com/560831323692/insurance-reporting.fifo
 
 ## API Gateway
 
-oopsie-api (not yet deployed)
+oopsie-api
+
+https://ey5bvhivwj.execute-api.us-west-2.amazonaws.com/beta
 
 ## DynamoDB
 

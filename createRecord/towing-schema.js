@@ -5,7 +5,7 @@ const dynamoose = require('dynamoose');
 const towingSchema = new dynamoose.Schema({
   'id': String,
   'incidentId': String,
-  'date': String,
+  'incidentDate': String,
   'name': String,
   'phone': String,
   'vehicle': String,

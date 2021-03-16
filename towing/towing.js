@@ -7,8 +7,10 @@ const sqs = new AWS.SQS({apiVersion: '2012-11-05'});
 const sns = new AWS.SNS();
 const dynamoose = require('dynamoose');
 const towingModel = require('./towing-schema.js');
+const superagent = require('superagent');
 
 const queueUrl = 'https://sqs.us-west-2.amazonaws.com/560831323692/towing-service.fifo';
+const apiUrl = 'https://ey5bvhivwj.execute-api.us-west-2.amazonaws.com/beta';
 
 const params = {
   AttributeNames: [
@@ -40,51 +42,25 @@ setInterval(() => {
       stageOne = JSON.parse(data.Messages[0].Body);
       incidentInfo = JSON.parse(stageOne.Message);
       console.log(incidentInfo);
-        
+      
+      sqs.deleteMessage(deleteParams, function(err, data) {
+            if (err) {
+              console.log('Delete Error', err);
+            } else {
+              console.log('Message Deleted', data);
+            }
+            
+      });
+
+      superagent.post(`${apiUrl}/towing`).send(incidentInfo).then(console.log(`It's Working!`));
+
+      
+      // respond to user with notification
+      console.log(`${incidentInfo.name}, a tow truck has been dispatched to your location`);
       }
     });
+
+
 }, 5000);
 
 // route information to DB (superagent?) --> oopsie-api (not yet deployed)
-exports.handler = async (event) => {
-
-  let data;
-
-  try {
-    record = new towingModel({
-      incidentId: incidentInfo.incidentId,
-      date: incidentInfo.date,
-      name: incidentInfo.name,
-      phone: incidentInfo.phone,
-      vehicle: incidentInfo.vehicle,
-      location: incidentInfo.location,
-    });
-    data = await record.save();
-  } catch (e) {
-    return {
-      status: 500,
-      body: e.message,
-    }
-  }
-  let response = {
-    status: 200,
-    body: JSON.stringify(data),
-  }
-  return response;
-};
-
-// respond to user with notification
-console.log(`${incidentInfo.customer}, a tow truck has been dispatched to your location`);
-
-  
-
-setInterval(() => {
-  sqs.deleteMessage(deleteParams, function(err, data) {
-        if (err) {
-          console.log('Delete Error', err);
-        } else {
-          console.log('Message Deleted', data);
-        }
-        
-      });
-}, 5000);
