@@ -9,7 +9,7 @@ const sns = new AWS.SNS();
 
 const superagent = require('superagent');
 
-const queueUrl = 'https://sqs.us-west-2.amazonaws.com/560831323692/police-records.fifo';
+const queueUrl = 'https://sqs.us-west-2.amazonaws.com/560831323692/roadside-assistance.fifo';
 const apiUrl = 'https://ey5bvhivwj.execute-api.us-west-2.amazonaws.com/beta';
 
 const params = {
@@ -56,7 +56,7 @@ setInterval(() => {
 
       
       // respond to user with notification
-      console.log(`${incidentInfo.name}, your police report request has been received and will be filed.`);
+      console.log(`${incidentInfo.name}, a roadside assistance vehicle has been dispatched to your location.`);
       }
     });
 

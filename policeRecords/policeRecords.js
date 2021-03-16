@@ -55,7 +55,7 @@ setInterval(() => {
 
       
       // respond to user with notification
-      console.log(`${incidentInfo.name}, a tow truck has been dispatched to your location`);
+      console.log(`${incidentInfo.name}, your police report has been filed.`);
       }
     });
 

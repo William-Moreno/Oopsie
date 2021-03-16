@@ -5,9 +5,9 @@ AWS.config.update({ region: 'us-west-2' });
 const { Consumer } = require('sqs-consumer');
 const sqs = new AWS.SQS({apiVersion: '2012-11-05'});
 const sns = new AWS.SNS();
-/* const dynamoose = require('dynamoose'); */
+const dynamoose = require('dynamoose');
 const superagent = require('superagent');
-/* const policeDispatchModel = require('./policeDispatch-schema.js'); */
+const policeDispatchModel = require('./policeDispatch-schema.js');
 
 const queueUrl = 'https://sqs.us-west-2.amazonaws.com/560831323692/police-dispatch.fifo';
 const apiUrl = 'https://ey5bvhivwj.execute-api.us-west-2.amazonaws.com/beta';
