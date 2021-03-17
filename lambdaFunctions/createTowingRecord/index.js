@@ -6,6 +6,7 @@ const towingModel = require('./towing-schema.js');
 
 exports.handler = async (event) => {
 
+
   const { incidentId, incidentType, incidentDate, name, phone, vehicle, location } = JSON.parse(event.body);
   let data;
 
