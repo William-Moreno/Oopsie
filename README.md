@@ -16,3 +16,7 @@ A back-end application simulating communication between a driver in distress and
 Initial UML
 
 ![Preliminary Whiteboard](./assets/oopsie-update.PNG)
+
+
+## Resources
+- SNS Messaging Lambda Adapted from Sean Bradley's AWS SMS Demo on YouTube and [Github](https://github.com/Sean-Bradley/AWS-SNS-SMS-with-NodeJS)
