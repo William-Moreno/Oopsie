@@ -97,6 +97,7 @@ setInterval(() => {
           function(err) {
           console.error(err, err.stack);
         });
+
       
       // respond to user with notification
       console.log(`${incidentInfo.name},  an officer has been dispatched to your location`);

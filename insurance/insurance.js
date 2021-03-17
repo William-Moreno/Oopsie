@@ -88,15 +88,15 @@ setInterval(() => {
       emailParams.Message.Body.Html.Data = `${incidentInfo.name}, your insurance claim has been filed.`;
 
       // Create the promise and SES service object
-      // let sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(emailParams).promise();
+      let sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(emailParams).promise();
 
-      // sendPromise.then(
-      //   function(data) {
-      //     console.log(data.MessageId);
-      //   }).catch(
-      //     function(err) {
-      //     console.error(err, err.stack);
-      //   });
+      sendPromise.then(
+        function(data) {
+          console.log(data.MessageId);
+        }).catch(
+          function(err) {
+          console.error(err, err.stack);
+        });
 
 
       // respond to user with notification
