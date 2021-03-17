@@ -13,13 +13,14 @@ exports.handler = async (event) => {
   let completeDate = Date();
   /*   let id = uuid(); */
 
+  data = await towingModel.query('id').eq(id).exec();
+  
   try {
 
-    data = await towingModel.query('id').eq(id).exec();
-
   const {
-    id,
+    // id,
     incidentId,
+    incidentType,
     incidentDate,
     name,
     phone,
@@ -33,6 +34,7 @@ exports.handler = async (event) => {
     let record = new towingModel({
       id,
       incidentId,
+      incidentType,
       incidentDate,
       name,
       phone,
@@ -46,6 +48,7 @@ exports.handler = async (event) => {
     data = await record.save();
 
   } catch (e) {
+    console.log(e);
     return {
       statusCode: 500,
       body: e.message,
