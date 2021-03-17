@@ -1,5 +1,5 @@
 {
-  "name": "towing",
+  "name": "sendEmail",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,10 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.864.0",
-    "dynamoose": "^2.7.2",
-    "faker": "^5.4.0",
-    "sqs-consumer": "^5.5.0",
-    "superagent": "^6.1.0"
+    "aws-sdk": "^2.866.0"
   }
 }
