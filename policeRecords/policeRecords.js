@@ -1,5 +1,6 @@
 'use strict';
 
+const faker = require('faker');
 const AWS = require('aws-sdk');
 AWS.config.update({ region: 'us-west-2' });
 const { Consumer } = require('sqs-consumer');
@@ -10,8 +11,10 @@ const superagent = require('superagent');
 
 const queueUrl = 'https://sqs.us-west-2.amazonaws.com/560831323692/police-records.fifo';
 const apiUrl = 'https://ey5bvhivwj.execute-api.us-west-2.amazonaws.com/beta';
+let deleteParams;
+let incidentInfo;
 
-const params = {
+const receiveParams = {
   AttributeNames: [
     'SentTimestamp',
   ],
@@ -24,13 +27,40 @@ const params = {
   WaitTimeSeconds: 0,
 };
 
-let deleteParams;
-let incidentInfo;
+let emailParams = {
+  Destination: { /* required */
+    ToAddresses: [
+      'oopsieappplication@gmail.com',
+      /* more items */
+    ]
+  },
+  Message: { /* required */
+    Body: { /* required */
+      Html: {
+       Charset: "UTF-8",
+       Data: "Your police report has been filed."
+      },
+      Text: {
+       Charset: "UTF-8",
+       Data: "Test Message"
+      }
+     },
+     Subject: {
+      Charset: 'UTF-8',
+      Data: 'Police Records'
+     }
+    },
+  Source: 'oopsieappplication@gmail.com', /* required */
+  ReplyToAddresses: [
+     'oopsieappplication@gmail.com',
+    /* more items */
+  ],
+};
 
 setInterval(() => {
   let stageOne;
 
-  sqs.receiveMessage(params, function(err, data) {
+  sqs.receiveMessage(receiveParams, function(err, data) {
     if (err) {
       console.log('Receive Error', err);
     } else if (data.Messages) {
@@ -53,6 +83,18 @@ setInterval(() => {
 
       superagent.post(`${apiUrl}/police`).send(incidentInfo).then(console.log(`It's Working!`));
 
+      emailParams.Message.Body.Html.Data = `${incidentInfo.name}, Officer ${faker.name.findName()} has filed your police report.`;
+
+      // Create the promise and SES service object
+      let sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(emailParams).promise();
+
+      sendPromise.then(
+        function(data) {
+          console.log(data.MessageId);
+        }).catch(
+          function(err) {
+          console.error(err, err.stack);
+        });
       
       // respond to user with notification
       console.log(`${incidentInfo.name}, your police report has been filed.`);

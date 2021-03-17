@@ -10,8 +10,10 @@ const superagent = require('superagent');
 
 const queueUrl = 'https://sqs.us-west-2.amazonaws.com/560831323692/insurance-reporting.fifo';
 const apiUrl = 'https://ey5bvhivwj.execute-api.us-west-2.amazonaws.com/beta';
+let deleteParams;
+let incidentInfo;
 
-const params = {
+const receiveParams = {
   AttributeNames: [
     'SentTimestamp',
   ],
@@ -24,13 +26,43 @@ const params = {
   WaitTimeSeconds: 0,
 };
 
-let deleteParams;
-let incidentInfo;
+let emailParams = {
+  Destination: { /* required */
+    ToAddresses: [
+      'oopsieappplication@gmail.com',
+      /* more items */
+    ]
+  },
+  Message: { /* required */
+    Body: { /* required */
+      Html: {
+       Charset: "UTF-8",
+       Data: "Your insurance claim has been filed."
+      },
+      Text: {
+       Charset: "UTF-8",
+       Data: "Test Message"
+      }
+     },
+     Subject: {
+      Charset: 'UTF-8',
+      Data: 'Insurance Claim'
+     }
+    },
+  Source: 'oopsieappplication@gmail.com', /* required */
+  ReplyToAddresses: [
+     'oopsieappplication@gmail.com',
+    /* more items */
+  ],
+};
+
+
+
 
 setInterval(() => {
   let stageOne;
 
-  sqs.receiveMessage(params, function(err, data) {
+  sqs.receiveMessage(receiveParams, function(err, data) {
     if (err) {
       console.log('Receive Error', err);
     } else if (data.Messages) {
@@ -53,7 +85,20 @@ setInterval(() => {
 
       superagent.post(`${apiUrl}/insurance`).send(incidentInfo).then(console.log(`It's Working!`));
 
-      
+      emailParams.Message.Body.Html.Data = `${incidentInfo.name}, your insurance claim has been filed.`;
+
+      // Create the promise and SES service object
+      let sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(emailParams).promise();
+
+      sendPromise.then(
+        function(data) {
+          console.log(data.MessageId);
+        }).catch(
+          function(err) {
+          console.error(err, err.stack);
+        });
+
+
       // respond to user with notification
       console.log(`${incidentInfo.name},your insurance claim has been filed.`);
       }
@@ -61,5 +106,6 @@ setInterval(() => {
 
 
 }, 5000);
+
 
 // route information to DB (superagent?) --> oopsie-api (not yet deployed)
