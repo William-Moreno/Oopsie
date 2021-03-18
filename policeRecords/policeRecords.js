@@ -42,7 +42,7 @@ let emailParams = {
       },
       Text: {
        Charset: "UTF-8",
-       Data: "Test Message"
+       Data: "Your police report has been filed."
       }
      },
      Subject: {
@@ -81,7 +81,7 @@ setInterval(() => {
             
       });
 
-      superagent.post(`${apiUrl}/police`).send(incidentInfo).then(console.log(`It's Working!`));
+      superagent.post(`${apiUrl}/police`).send(incidentInfo).then(console.log(`${incidentInfo.name}, your police report has been filed.`));
 
       emailParams.Message.Body.Html.Data = `${incidentInfo.name}, Officer ${faker.name.findName()} has filed your police report.`;
 
@@ -96,8 +96,6 @@ setInterval(() => {
           console.error(err, err.stack);
         });
       
-      // respond to user with notification
-      console.log(`${incidentInfo.name}, your police report has been filed.`);
       }
     });
 

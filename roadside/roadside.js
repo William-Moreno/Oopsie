@@ -43,7 +43,7 @@ let emailParams = {
       },
       Text: {
        Charset: "UTF-8",
-       Data: "Test Message"
+       Data: "Roadside assistance is on the way."
       }
      },
      Subject: {
@@ -82,7 +82,7 @@ setInterval(() => {
             
       });
 
-      superagent.post(`${apiUrl}/roadside`).send(incidentInfo).then(console.log(`It's Working!`));
+      superagent.post(`${apiUrl}/roadside`).send(incidentInfo).then(console.log(`${incidentInfo.name}, a roadside assistance vehicle has been dispatched to your location.`));
 
       emailParams.Message.Body.Html.Data = `${incidentInfo.name}, ${faker.name.findName()} with ZZZ Roadside Assistance has been dispatched to your location.`;
 
@@ -97,9 +97,6 @@ setInterval(() => {
           console.error(err, err.stack);
         });
 
-      
-      // respond to user with notification
-      console.log(`${incidentInfo.name}, a roadside assistance vehicle has been dispatched to your location.`);
       }
     });
 
