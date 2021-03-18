@@ -118,7 +118,7 @@ setInterval(() => {
     });
 
 
-}, 5000);
+}, 12000);
 
 
 // route information to DB (superagent?) --> oopsie-api (not yet deployed)
