@@ -95,6 +95,21 @@ setInterval(() => {
           function(err) {
           console.error(err, err.stack);
         });
+
+        let smsParams = {
+        Message: emailParams.Message.Body.Html.Data,
+        PhoneNumber: '12064138371',
+      };
+
+      let publishTextPromise = new AWS.SNS({ apiVersion: '2010-03-31' }).publish(smsParams).promise();
+
+      publishTextPromise.then(
+        function (data) {
+          console.log("MessageID is " + data.MessageId);
+        }).catch(
+          function (err) {
+            res.end(JSON.stringify({ Error: err }));
+          });
       
       }
     });
