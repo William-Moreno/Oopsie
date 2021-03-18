@@ -11,7 +11,7 @@ const superagent = require('superagent');
 const policeDispatchModel = require('./policeDispatch-schema.js');
 
 const queueUrl = 'https://sqs.us-west-2.amazonaws.com/560831323692/police-dispatch.fifo';
-const apiUrl = 'https://ey5bvhivwj.execute-api.us-west-2.amazonaws.com/beta';
+const dispatchReport = 'arn:aws:sns:us-west-2:560831323692:dispatch-report.fifo';
 let deleteParams;
 let incidentInfo;
 
@@ -83,7 +83,18 @@ setInterval(() => {
             
       });
 
-      superagent.post(`${apiUrl}/police`).send(incidentInfo).then(console.log(`${incidentInfo.name},  an officer has been dispatched to your location`));
+      // superagent.post(`${apiUrl}/police`).send(incidentInfo).then(console.log(`${incidentInfo.name},  an officer has been dispatched to your location`));
+
+      console.log(`${incidentInfo.name}, an officer has been dispatched to your location`);
+
+      const reportParams = {
+        MessageGroupId: 'test',
+        MessageDeduplicationId: faker.random.uuid(),
+        TopicArn: dispatchReport,
+        Message:JSON.stringify(incidentInfo),
+      };
+  
+      sns.publish(reportParams).promise().then(console.log).catch(console.error);
 
       emailParams.Message.Body.Html.Data = `${incidentInfo.name}, Officer ${faker.name.findName()} has been dispatched to your location.`;
 

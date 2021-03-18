@@ -22,6 +22,9 @@ auto-theft-breakin.fifo
 
 arn:aws:sns:us-west-2:560831323692:auto-theft-breakin.fifo
 
+dispatch-report.fifo
+
+arn:aws:sns:us-west-2:560831323692:dispatch-report.fifo
 
 ## SQS Queues
 
