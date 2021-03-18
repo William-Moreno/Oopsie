@@ -86,7 +86,7 @@ setInterval(() => {
 
       superagent.post(`${apiUrl}/insurance`).send(incidentInfo).then(console.log(`${incidentInfo.name},your insurance claim has been filed.`));
 
-      emailParams.Message.Body.Html.Data = `${incidentInfo.name}, your insurance claim has been filed ${faker.name.findName}.`;
+      emailParams.Message.Body.Html.Data = `${incidentInfo.name}, your insurance claim has been filed by ${faker.name.findName()}.`;
 
       // Create the promise and SES service object
       let sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(emailParams).promise();
