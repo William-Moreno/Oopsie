@@ -13,11 +13,11 @@ A back-end application simulating communication between a driver in distress and
 
 ## UML
 
-Initial UML
+Conceptual UML
 
-![Preliminary Whiteboard](./assets/updated-uml.PNG)
+![UML Whiteboard](./assets/uml-dispatch-records-add.PNG)
 
 
 ## Resources
 - SNS Messaging Lambda Adapted from Sean Bradley's AWS SMS Demo on YouTube and [Github](https://github.com/Sean-Bradley/AWS-SNS-SMS-with-NodeJS)
-- Adapted rom AWS SNS examples: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sns-examples-sending-sms.html
+- Adapted from AWS SNS examples: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sns-examples-sending-sms.html
