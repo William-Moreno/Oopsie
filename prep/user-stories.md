@@ -28,6 +28,6 @@
 # Notifications
 ## As a user, I would like to receive acknowledgements when my requests are received by various assistance providers.
 - When any request is received by the appropriate service or services, the application sends a notification to the user when a driver is dispatched or when a report is saved.
-- The user successfully receives a notification when services are on the way, or when their report it saved.
+- The user successfully receives a notification when services are on the way, or when their report is saved.
 
 

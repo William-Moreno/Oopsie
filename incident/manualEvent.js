@@ -25,10 +25,14 @@ class Location {
 
 class Vehicle {
   constructor() {
+    let customVehicle;
+    if(eventData.make && eventData.model) {
+      customVehicle = `${eventData.make} ${eventData.model}`;
+    }
     let color = faker.vehicle.color();
     let capitalColor = color.charAt(0).toUpperCase() + color.slice(1);
     let year = 1990 + Math.floor(Math.random() * 31);
-    this.vehicleInfo = `${eventData.color || capitalColor} ${eventData.year || year} ${(eventData.make + ' ' + eventData.model) || faker.vehicle.vehicle()}`
+    this.vehicleInfo = `${eventData.color || capitalColor} ${eventData.year || year} ${customVehicle || faker.vehicle.vehicle()}`;
   }
 }
 
@@ -82,6 +86,7 @@ class IncidentReport {
     this.incidentDate = new TimeOfIncident().timeInfo,
     this.name = eventData.name || faker.name.findName(),
     this.phone = eventData.phone || faker.phone.phoneNumberFormat(),
+    this.email = eventData.email,
     this.insurancePolicy = faker.random.uuid(),
     this.location = new Location().locationInfo,
     this.vehicle = new Vehicle().vehicleInfo
@@ -108,6 +113,7 @@ inquirer
       type: 'input',
       message: 'Driver\'s Name',
       name: 'name',
+      default: 'Jacob Knaack',
       validate: async (name) => {
         if(!name) {
           return 'Please enter driver\'s name';
@@ -119,6 +125,7 @@ inquirer
       type: 'input',
       message: 'Phone Number',
       name: 'phone',
+      default: '263-333-5569',
       validate: async (phone) => {
         if(!phone) {
           return 'Please enter a valid phone number';
@@ -130,6 +137,7 @@ inquirer
       type: 'input',
       message: 'E-mail Address',
       name: 'email',
+      default: 'jknaack@oopsie.app',
       validate: async (email) => {
         if(!emailChecker.test(email)) {
           return 'Please enter a valid e-mail address';
@@ -141,6 +149,7 @@ inquirer
       type: 'number',
       message: 'Vehicle Year',
       name: 'year',
+      default: '2021',
       validate: async (year) => {
         if(year < 1950 || year > 2021) {
           return 'Please enter a year between 1950 and 2021';
@@ -152,38 +161,37 @@ inquirer
       type: 'input',
       message: 'Vehicle Make (ie. Ford, Dodge, Nissan)',
       name: 'make',
-      validate: async (make) => {
-        if(!make) {
-          return 'Please enter vehicle make';
-        }
-        return true;
-      }
+      // validate: async (make) => {
+      //   if(!make) {
+      //     return 'Please enter vehicle make';
+      //   }
+      //   return true;
+      // }
     },
     {
       type: 'input',
       message: 'Vehicle Model (ie. Mustang, Challenger, Altima)',
       name: 'model',
-      validate: async (model) => {
-        if(!model) {
-          return 'Please enter vehicle model';
-        }
-        return true;
-      }
+      // validate: async (model) => {
+      //   if(!model) {
+      //     return 'Please enter vehicle model';
+      //   }
+      //   return true;
+      // }
     },
     {
       type: 'input',
       message: 'Vehicle Color',
       name: 'color',
-      validate: async (color) => {
-        if(!color) {
-          return 'Please enter color of vehicle';
-        }
-        return true;
-      }
+      // validate: async (color) => {
+      //   if(!color) {
+      //     return 'Please enter color of vehicle';
+      //   }
+      //   return true;
+      // }
     },
   ])
   .then(answers => {
-    console.log(answers);
     eventData = answers;
     report = new IncidentReport();
     console.log(report);

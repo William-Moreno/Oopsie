@@ -43,7 +43,7 @@ let emailParams = {
       },
       Text: {
        Charset: "UTF-8",
-       Data: "Test Message"
+       Data: "A tow truck has been dispatched to your location."
       }
      },
      Subject: {
@@ -82,7 +82,7 @@ setInterval(() => {
             
       });
 
-      superagent.post(`${apiUrl}/towing`).send(incidentInfo).then(console.log(`It's Working!`));
+      superagent.post(`${apiUrl}/towing`).send(incidentInfo).then(console.log(`${incidentInfo.name}, a tow truck has been dispatched to your location`));
 
       emailParams.Message.Body.Html.Data = `${incidentInfo.name}, ${faker.name.findName()} with ${faker.name.firstName()}'s Towing has been dispatched to your location.`;
 
@@ -96,9 +96,7 @@ setInterval(() => {
           function(err) {
           console.error(err, err.stack);
         });
-      
-      // respond to user with notification
-      console.log(`${incidentInfo.name}, a tow truck has been dispatched to your location`);
+
       }
     });
 

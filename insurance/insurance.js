@@ -1,5 +1,6 @@
 'use strict';
 
+const faker = require('faker');
 const AWS = require('aws-sdk');
 AWS.config.update({ region: 'us-west-2' });
 const { Consumer } = require('sqs-consumer');
@@ -41,7 +42,7 @@ let emailParams = {
       },
       Text: {
        Charset: "UTF-8",
-       Data: "Test Message"
+       Data: "Your insurance claim has been filed."
       }
      },
      Subject: {
@@ -83,9 +84,9 @@ setInterval(() => {
             
       });
 
-      superagent.post(`${apiUrl}/insurance`).send(incidentInfo).then(console.log(`It's Working!`));
+      superagent.post(`${apiUrl}/insurance`).send(incidentInfo).then(console.log(`${incidentInfo.name},your insurance claim has been filed.`));
 
-      emailParams.Message.Body.Html.Data = `${incidentInfo.name}, your insurance claim has been filed.`;
+      emailParams.Message.Body.Html.Data = `${incidentInfo.name}, your insurance claim has been filed ${faker.name.findName}.`;
 
       // Create the promise and SES service object
       let sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(emailParams).promise();
@@ -98,9 +99,6 @@ setInterval(() => {
           console.error(err, err.stack);
         });
 
-
-      // respond to user with notification
-      console.log(`${incidentInfo.name},your insurance claim has been filed.`);
       }
     });
 
