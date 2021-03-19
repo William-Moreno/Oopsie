@@ -72,4 +72,32 @@ describe('Testing API Gateway routes and Lambda functions', () =>{
     });
 });
 
+describe('Testing to see if records are written to databases', () => {
+  it('Should return a list of records using GET /police', async () => {
+    const response = await superagent.get(`${apiUrl}/police`);
 
+    expect(response.body.length).toBeTruthy();
+    expect(response.body[0].name).toBeTruthy();
+  });
+
+  it('Should return a list of records using GET /towing', async () => {
+    const response = await superagent.get(`${apiUrl}/towing`);
+
+    expect(response.body.length).toBeTruthy();
+    expect(response.body[0].name).toBeTruthy();
+  });
+
+  it('Should return a list of records using GET /roadside', async () => {
+    const response = await superagent.get(`${apiUrl}/roadside`);
+
+    expect(response.body.length).toBeTruthy();
+    expect(response.body[0].name).toBeTruthy();
+  });
+
+  it('Should return a list of records using GET /insurance', async () => {
+    const response = await superagent.get(`${apiUrl}/insurance`);
+
+    expect(response.body.length).toBeTruthy();
+    expect(response.body[0].name).toBeTruthy();
+  });
+});
