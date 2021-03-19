@@ -5,8 +5,8 @@ const superagent = require('superagent');
 const apiUrl = 'https://ey5bvhivwj.execute-api.us-west-2.amazonaws.com/beta';
 
 
-describe('testing the amazon api gateway routes', () =>{
-    it('test should send the data', async () =>{
+describe('Testing API Gateway routes and Lambda functions', () =>{
+    it('Should post a document to the towing-records table on /towing route', async () =>{
         const response = await superagent.post(`${apiUrl}/towing`).send({
   incidentId: 'a8422068-fb33-4602-aa47-e6a5b297548a',
   incidentType: 'Minor Accident',
@@ -22,7 +22,7 @@ describe('testing the amazon api gateway routes', () =>{
         expect(response.body.name).toEqual('John Smith')
     });
 
-    it('test should send the data', async () =>{
+    it('Should post a document to the roadside-records table on /roadside route', async () =>{
         const response = await superagent.post(`${apiUrl}/roadside`).send({
   incidentId: '6a5b2975-02a4-4jh4-m9d7-df223y5753ia',
   incidentType: 'Roadside Assistance',
@@ -39,7 +39,7 @@ describe('testing the amazon api gateway routes', () =>{
         expect(response.body.incidentType).toEqual('Roadside Assistance')
     });
 
-    it('test should send the data', async () =>{
+    it('Should post a document to the police-records table on /police route', async () =>{
         const response = await superagent.post(`${apiUrl}/police`).send({
   incidentId: 'a8422068-fb33-4602-aa47-e6a5b297548a',
   incidentType: 'Major Accident',
@@ -55,7 +55,7 @@ describe('testing the amazon api gateway routes', () =>{
         expect(response.body.incidentType).toEqual('Major Accident')
     });
 
-    it('test should send the data', async () =>{
+    it('Should post a document to the insurance-claims table on /insurance route', async () =>{
         const response = await superagent.post(`${apiUrl}/insurance`).send({
   incidentId: 'a8422068-fb33-4602-aa47-e6a5b297548a',
   incidentType: 'Minor Accident',
